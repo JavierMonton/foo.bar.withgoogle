@@ -1,4 +1,5 @@
 # Generate all possible directions, follow them, break if repeated path
+import math
 import sys
 
 def solution(dimensions, your_position, trainer_position, distance):
@@ -12,7 +13,7 @@ def solution(dimensions, your_position, trainer_position, distance):
     p = generate_possibilities(width, height)
     total = 0
     directions = []
-    max_distance = distance * distance
+    max_distance = distance
     distance = 0
 
     for direction in p:
@@ -23,8 +24,8 @@ def solution(dimensions, your_position, trainer_position, distance):
             total += 1
             directions.append(direction)
 
-    #for d in directions:
-     #  print("(" + str(d.x) + ", " + str(d.y) + ")")
+    for d in directions:
+       print("(" + str(d.x) + ", " + str(d.y) + ")")
     return total
 
 
@@ -85,35 +86,35 @@ def step(a, direction, width, height, distance=0):
     """
     x = a[0] + direction.x
     y = a[1] + direction.y
+    x_distance = abs(direction.x)
+    y_distance = abs(direction.y)
     if x > width:
         tmp = x - width
-        x = width - tmp + 1
-        distance = distance + 2
+        x = width - tmp
         direction.x = direction.x * -1
     if y > height:
         tmp = y - height
-        y = height - tmp + 1
-        distance = distance + 2
+        y = height - tmp
         direction.y = direction.y * -1
     if x < 1:
         x = abs(x)
-        distance = distance + 2
         direction.x = direction.x * -1
     if y < 1:
         y = abs(y)
-        distance = distance + 2
         direction.y = direction.y * -1
 
     tmp = (x, y)
-    distance = distance + abs(direction.x) + abs(direction.y)
+    xd = x_distance * x_distance
+    yd = y_distance * y_distance
+    distance = math.sqrt(xd + yd)
     return tmp, distance
 
 sys.setrecursionlimit(1500)
 print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-print(solution([3, 2], [1, 1], [2, 2], 8))  # 3
+print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
 print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
 print(solution([3, 3], [1, 1], [3, 3], 1))  # 0
-print(solution([3, 3], [1, 1], [3, 3], 2))  # ?
-print(solution([3, 3], [1, 1], [3, 3], 3))  # 5?
+print(solution([3, 3], [1, 1], [3, 3], 2))  # 0
+print(solution([3, 3], [1, 1], [3, 3], 3))  # 1?
 print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
 #print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
