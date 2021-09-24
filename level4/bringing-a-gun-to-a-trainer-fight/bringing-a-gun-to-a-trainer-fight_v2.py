@@ -1,3 +1,4 @@
+# Generate all possible directions, iterate over them, skipping repeated paths
 def solution(dimensions, your_position, trainer_position, distance):
 
     width = dimensions[0]
@@ -7,11 +8,13 @@ def solution(dimensions, your_position, trainer_position, distance):
     trainer = (trainer_position[0], trainer_position[1])
 
     p = generate_possibilities(width, height)
-    total = 0;
+    total = 0
     directions = []
+
     for direction in p:
+        passed = {}
         first_step = step(me, direction, width, height)
-        found = follow_path(first_step, me, trainer, width, height, direction, distance - 1)
+        found = follow_path(first_step, me, trainer, width, height, direction, distance - 1, passed)
         if found is True:
             total += 1
             directions.append(direction)
@@ -42,16 +45,19 @@ def check_repeated(x, y):
     return x == 1 or y == 1 or (x % y != 0 and y % x != 0)
 
 
-def follow_path(start_point, me, goal, width, height, direction, distance, found = False):
+def follow_path(start_point, me, goal, width, height, direction, distance, passed, found=False):
     """
     Follow the path of a bullet
     """
+    if str(start_point) in passed:  # repeated step
+        return False
     if start_point == goal:
         return True
     if start_point == me or distance == 0:  # we should skip first iteration of this outside of this function
         return False
     ####
-    return follow_path(step(start_point, direction, width, height), me, goal, width, height, direction, distance - 1, found)
+    passed[str(start_point)] = True
+    return follow_path(step(start_point, direction, width, height), me, goal, width, height, direction, distance - 1, passed, found)
 
 
 def step(a, b, width, height):

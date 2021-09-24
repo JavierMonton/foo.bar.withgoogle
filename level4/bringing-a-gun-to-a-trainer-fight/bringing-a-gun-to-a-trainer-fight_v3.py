@@ -1,3 +1,4 @@
+# Generate all possible directions, follow them, break if repeated path
 def solution(dimensions, your_position, trainer_position, distance):
 
     width = dimensions[0]
@@ -7,11 +8,13 @@ def solution(dimensions, your_position, trainer_position, distance):
     trainer = (trainer_position[0], trainer_position[1])
 
     p = generate_possibilities(width, height)
-    total = 0;
+    total = 0
     directions = []
+
     for direction in p:
-        first_step = step(me, direction, width, height)
-        found = follow_path(first_step, me, trainer, width, height, direction, distance - 1)
+        passed = {}
+        first_step, walls = step(me, direction, width, height)
+        found = follow_path(first_step, me, trainer, width, height, direction, distance - walls, passed)
         if found is True:
             total += 1
             directions.append(direction)
@@ -42,19 +45,25 @@ def check_repeated(x, y):
     return x == 1 or y == 1 or (x % y != 0 and y % x != 0)
 
 
-def follow_path(start_point, me, goal, width, height, direction, distance, found = False):
+def follow_path(start_point, me, goal, width, height, direction, distance, passed, found=False):
     """
     Follow the path of a bullet
     """
+    if distance < 0:  # more walls that expected
+        return False
+    if str(start_point) in passed:  # repeated step
+        return False
     if start_point == goal:
         return True
     if start_point == me or distance == 0:  # we should skip first iteration of this outside of this function
         return False
     ####
-    return follow_path(step(start_point, direction, width, height), me, goal, width, height, direction, distance - 1, found)
+    passed[str(start_point)] = True
+    point, walls = step(start_point, direction, width, height)
+    return follow_path(point, me, goal, width, height, direction, distance - walls, passed, found)
 
 
-def step(a, b, width, height):
+def step(a, b, width, height, distance=0):
     """
     Makes a move on tuples, using walls or not
     :param a: start point
@@ -68,17 +77,23 @@ def step(a, b, width, height):
     if x > width:
         tmp = x - width
         x = width - tmp
+        distance += 1
     if y > height:
         tmp = y - height
         y = height - tmp
+        distance += 1
     if x < 1:
         x = abs(x)
+        distance += 1
     if y < 1:
         y = abs(y)
+        distance += 1
 
-    return (x, y)
+    tmp = (x, y)
+    return tmp, distance
 
-
-print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
+print(solution([3, 3], [1, 1], [3, 3], 1))  # 1
+#print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
+#print(solution([3, 2], [1, 1], [2, 1], 1))  # 3
+#print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
 #print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
