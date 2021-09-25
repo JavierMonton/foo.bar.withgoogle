@@ -1,6 +1,7 @@
 # Generate all possible directions, follow them, break if repeated path
 import math
 
+
 def solution(dimensions, your_position, trainer_position, distance):
 
     width = dimensions[0]
@@ -9,15 +10,6 @@ def solution(dimensions, your_position, trainer_position, distance):
     me = (your_position[0], your_position[1])
     trainer = (trainer_position[0], trainer_position[1])
 
-    #p = []
-    #p.append(Direction(0, 1))
-    #p.append(Direction(1, 0))
-    #p.append(Direction(0, -1))
-    #p.append(Direction(-1, 0))
-    #p1 = generate_direct_possibilities(p, width-me[0]+1, height-me[1]+1, True, True)
-    #p2 = generate_direct_possibilities(p, width, height, False, False)
-    #p3 = generate_direct_possibilities(p, width - me[0] + 1, height, True, False)
-    #p4 = generate_direct_possibilities(p, width, height - me[1] + 1, False, True)
     p = generate_possibilities(width, height)
     total = 0
     directions = []
@@ -33,10 +25,16 @@ def solution(dimensions, your_position, trainer_position, distance):
         found = follow_path(first_step, me, trainer, width, height, direction, distance + new_distance, max_distance, passed)
         if found is True:
             total += 1
-            #directions.append(orig_direction)
+            directions.append(orig_direction)
 
     #for d in directions:
-     #   print("(" + str(d.x) + ", " + str(d.y) + ")")
+    #    print("(" + str(d.x) + ", " + str(d.y) + ")")
+
+    for d in directions:
+        for e in directions:
+            if d.x != 0 and d.y !=0 and (abs(d.x) != abs(e.x) and abs(e.y) != abs(d.y)) and e.x % d.x == 0 and e.y % d.y == 0 and e.x // d.x == e.y // d.y:  # repeated direction
+                #print(" -- (" + str(e.x) + ", " + str(e.y) + ")")
+                total -= 1
     return total
 
 
@@ -65,6 +63,10 @@ def generate_possibilities(width, height):
     return p
 
 
+def check_repeated(x, y):
+    return x == 1 or y == 1 or (x % y != 0 and y % x != 0)
+
+
 def generate_direct_possibilities(p, width, height, x_sign, y_sign):
     """
     Given an scenario, creates an array of possibilities where the trainer can shot in one direction
@@ -84,24 +86,20 @@ def generate_direct_possibilities(p, width, height, x_sign, y_sign):
     return p
 
 
-def check_repeated(x, y):
-    return x == 1 or y == 1 or (x % y != 0 and y % x != 0)
-
-
 def follow_path(start_point, me, goal, width, height, direction, distance, max_distance, passed, found=False):
     """
     Follow the path of a bullet
     """
     if distance > max_distance:  # more distance than possible
         return False
-    #if str(start_point) in passed:  # repeated step
+    #if str(start_point) in passed and passed[str(start_point)].x == direction.x and passed[str(start_point)].y == direction.y:  # repeated step - less performance but less steps
     #    return False
     if start_point == goal:
         return True
     if start_point == me:  # we should skip first iteration of this outside of this function
         return False
     ####
-    #passed[str(start_point)] = True
+    #passed[str(start_point)] = direction
     point, new_distance = step(start_point, direction, width, height)
     return follow_path(point, me, goal, width, height, direction, distance + new_distance, max_distance, passed, found)
 
@@ -123,14 +121,10 @@ def step(a, direction, width, height):
         tmp = x - width
         x = width - tmp
         direction.x = direction.x * -1
-        #x_distance = x_distance + x_distance
-        #y_distance = y_distance + y_distance
     if y > height:
         tmp = y - height
         y = height - tmp
         direction.y = direction.y * -1
-        #x_distance = x_distance + x_distance
-        #y_distance = y_distance + y_distance
     if x < 1:
         x = abs(x)
         direction.x = direction.x * -1
@@ -145,12 +139,18 @@ def step(a, direction, width, height):
     return tmp, distance
 
 
+
 print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
-print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
-print(solution([3, 3], [1, 1], [3, 3], 1))  # 0
-print(solution([4, 4], [1, 1], [3, 3], 2))  # 0
-print(solution([4, 4], [1, 1], [3, 3], 3))  # 1?
-print(solution([3, 3], [1, 1], [1, 2], 1))  # 1
+print(solution([2, 3], [1, 2], [1, 1], 8))  # 7
+print(solution([10, 10], [1, 1], [9, 9], 20))  #
+#print(solution([3, 2], [1, 1], [2, 1], 8))  # 7?
+#print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
+#print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
+#print(solution([3, 3], [1, 1], [3, 3], 1))  # 0
+#print(solution([4, 4], [1, 1], [3, 3], 2))  # 0
+#print(solution([4, 4], [1, 1], [3, 3], 3))  # 1?
+#print(solution([3, 3], [1, 1], [1, 2], 1))  # 1
 print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
+print(solution([300, 275], [150, 150], [185, 100], 5000))  # 9
+print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
 #print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
