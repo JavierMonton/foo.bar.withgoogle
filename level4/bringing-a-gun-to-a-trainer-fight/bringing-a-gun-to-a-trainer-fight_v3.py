@@ -22,7 +22,7 @@ def solution(dimensions, your_position, trainer_position, distance):
         #    print("pass")
         passed = {}
         first_step, new_distance = step(me, direction, width, height)
-        found = follow_path(first_step, me, trainer, width, height, direction, distance + new_distance, max_distance, passed)
+        found = follow_path_non_recursive(first_step, me, trainer, width, height, direction, distance + new_distance, max_distance, passed)
         if found is True:
             total += 1
             directions.append(orig_direction)
@@ -86,22 +86,25 @@ def generate_direct_possibilities(p, width, height, x_sign, y_sign):
     return p
 
 
-def follow_path(start_point, me, goal, width, height, direction, distance, max_distance, passed, found=False):
+def follow_path_non_recursive(start_point, me, goal, width, height, direction, distance, max_distance, passed, found=False):
     """
-    Follow the path of a bullet
+    Follow the path of a bullet without recursion (max recursion depth of python is 1000)
     """
-    if distance > max_distance:  # more distance than possible
-        return False
-    #if str(start_point) in passed and passed[str(start_point)].x == direction.x and passed[str(start_point)].y == direction.y:  # repeated step - less performance but less steps
-    #    return False
-    if start_point == goal:
-        return True
-    if start_point == me:  # we should skip first iteration of this outside of this function
-        return False
-    ####
-    #passed[str(start_point)] = direction
-    point, new_distance = step(start_point, direction, width, height)
-    return follow_path(point, me, goal, width, height, direction, distance + new_distance, max_distance, passed, found)
+    while True:
+        if distance > max_distance:  # more distance than possible
+            break
+        #if str(start_point) in passed and passed[str(start_point)].x == direction.x and passed[str(start_point)].y == direction.y:  # repeated step - less performance but less steps
+        #    return False
+        if start_point == goal:
+            found = True
+            break
+        if start_point == me:  # we should skip first iteration of this outside of this function
+            break
+        ####
+        #passed[str(start_point)] = direction
+        start_point, new_distance = step(start_point, direction, width, height)
+        distance = distance + new_distance
+    return found
 
 
 def step(a, direction, width, height):
@@ -142,15 +145,15 @@ def step(a, direction, width, height):
 
 print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
 print(solution([2, 3], [1, 2], [1, 1], 8))  # 7
-print(solution([10, 10], [1, 1], [9, 9], 20))  #
-#print(solution([3, 2], [1, 1], [2, 1], 8))  # 7?
-#print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
-#print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
-#print(solution([3, 3], [1, 1], [3, 3], 1))  # 0
-#print(solution([4, 4], [1, 1], [3, 3], 2))  # 0
-#print(solution([4, 4], [1, 1], [3, 3], 3))  # 1?
-#print(solution([3, 3], [1, 1], [1, 2], 1))  # 1
+print(solution([10, 10], [1, 1], [9, 9], 10))  # 0
+print(solution([3, 2], [1, 1], [2, 1], 8))  # 7?
+print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
+print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
+print(solution([3, 3], [1, 1], [3, 3], 1))  # 0
+print(solution([4, 4], [1, 1], [3, 3], 2))  # 0
+print(solution([4, 4], [1, 1], [3, 3], 3))  # 1?
+print(solution([3, 3], [1, 1], [1, 2], 1))  # 1
 print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
-print(solution([300, 275], [150, 150], [185, 100], 5000))  # 9
-print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
+#print(solution([300, 275], [150, 150], [185, 100], 5000))  # 133?
+#print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 4?
 #print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
