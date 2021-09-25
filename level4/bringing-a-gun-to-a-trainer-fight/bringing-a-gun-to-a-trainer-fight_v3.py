@@ -17,18 +17,19 @@ def solution(dimensions, your_position, trainer_position, distance):
     distance = 0
 
     for direction in p:
-        orig_direction = Direction(direction.x, direction.y)
-        #if orig_direction.x == 7 and orig_direction.y == -10:
-        #    print("pass")
-        passed = {}
-        first_step, new_distance = step(me, direction, width, height)
-        found = follow_path_non_recursive(first_step, me, trainer, width, height, direction, distance + new_distance, max_distance, passed)
-        if found is True:
-            total += 1
-            directions.append(orig_direction)
+        if (direction.x != 0 or me[0] == trainer[0]) and (direction.y != 0 or me[1] == trainer[1]):  # skip big loops of direct shot
+            orig_direction = Direction(direction.x, direction.y)
+            #if orig_direction.x == 7 and orig_direction.y == -10:
+            #    print("pass")
+            passed = {}
+            first_step, new_distance = step(me, direction, width, height)
+            found = follow_path_non_recursive(first_step, me, trainer, width, height, direction, distance + new_distance, max_distance, passed)
+            if found is True:
+                total += 1
+                directions.append(orig_direction)
 
     #for d in directions:
-    #    print("(" + str(d.x) + ", " + str(d.y) + ")")
+     #   print("(" + str(d.x) + ", " + str(d.y) + ")")
 
     for d in directions:
         for e in directions:
@@ -143,9 +144,10 @@ def step(a, direction, width, height):
 
 
 
-print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-print(solution([2, 3], [1, 2], [1, 1], 8))  # 7
-print(solution([10, 10], [1, 1], [9, 9], 10))  # 0
+#print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
+#print(solution([2, 3], [1, 2], [1, 1], 4))  # 7
+#print(solution([10, 10], [1, 1], [9, 9], 10))  # 0
+print(solution([10, 2], [2, 1], [9, 1], 10))  # 5
 print(solution([3, 2], [1, 1], [2, 1], 8))  # 7?
 print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
 print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
