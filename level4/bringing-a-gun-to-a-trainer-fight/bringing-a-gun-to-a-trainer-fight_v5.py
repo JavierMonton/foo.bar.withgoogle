@@ -40,33 +40,10 @@ def solution(dimensions, your_position, trainer_position, distance):
             trainer_locations.append((x, -y))
             trainer_locations.append((-x, -y))
 
-            new_me = (me_x, me_y)
-            new_me_distance = compute_distance(new_me, me)
-            if new_me_distance != 0:
-                # if it doesn't exists or it's greater than new distance
-                if astr(new_me, me) not in me_distances or me_distances[astr(new_me, me)] > new_me_distance:
-                    me_distances[astr(new_me, me)] = new_me_distance
-
-            new_me = (-me_x, me_y)
-            new_me_distance = compute_distance(new_me, me)
-            if new_me_distance != 0:
-                # if it doesn't exists or it's greater than new distance
-                if astr(new_me, me) not in me_distances or me_distances[astr(new_me, me)] > new_me_distance:
-                    me_distances[astr(new_me, me)] = new_me_distance
-
-            new_me = (me_x, -me_y)
-            new_me_distance = compute_distance(new_me, me)
-            if new_me_distance != 0:
-                # if it doesn't exists or it's greater than new distance
-                if astr(new_me, me) not in me_distances or me_distances[astr(new_me, me)] > new_me_distance:
-                    me_distances[astr(new_me, me)] = new_me_distance
-
-            new_me = (-me_x, -me_y)
-            new_me_distance = compute_distance(new_me, me)
-            if new_me_distance != 0:
-                # if it doesn't exists or it's greater than new distance
-                if astr(new_me, me) not in me_distances or me_distances[astr(new_me, me)] > new_me_distance:
-                    me_distances[astr(new_me, me)] = new_me_distance
+            put_clones(me, me_distances, (me_x, me_y))
+            put_clones(me, me_distances, (-me_x, me_y))
+            put_clones(me, me_distances, (me_x, -me_y))
+            put_clones(me, me_distances, (-me_x, -me_y))
 
             if j % 2 == 1:
                 y = y + jump_y1
@@ -84,7 +61,7 @@ def solution(dimensions, your_position, trainer_position, distance):
             me_x = me_x + me_jump_x2
         i += 1
 
-    total_angles = set()
+    total_angles = set()  # to avoid duplicates
     for t in trainer_locations:
         new_distance = compute_distance(t, me)
         if new_distance <= distance:
@@ -92,20 +69,31 @@ def solution(dimensions, your_position, trainer_position, distance):
             if angle not in me_distances or me_distances[angle] > new_distance:
                 total_angles.add(angle)
 
-    #print(me_distances)
     return len(total_angles)
 
 
+def put_clones(me, me_distances, new_me):
+    """
+    Insert a "new me" using angle as key. If the "new me" is closer, it replaces the old one
+    """
+    new_me_distance = compute_distance(new_me, me)
+    if new_me_distance != 0:
+        # if it doesn't exists or it's greater than new distance
+        if astr(new_me, me) not in me_distances or me_distances[astr(new_me, me)] > new_me_distance:
+            me_distances[astr(new_me, me)] = new_me_distance
+
+
 def astr(a, b):
-    return compute_angle(a, b)
+    return str(compute_angle(a, b))
+
+
 def compute_angle(a, b):
-    #return math.atan2(a[0] - b[0], a[1] - b[1])
-    return math.atan2(b[1] - a[1], b[0] - a[0])
-def dist(a, b):
+    return math.atan2(a[0] - b[0], a[1] - b[1])
+
+
+def compute_distance(a, b):
     return math.sqrt(math.pow(a[0] - b[0], 2) + math.pow(a[1] - b[1], 2))
 
-def compute_distance(pos1, pos2):
-    return math.sqrt((pos1[0] - pos2[0]) ** 2 + (pos1[1] - pos2[1]) ** 2)
 
 
 
@@ -143,13 +131,13 @@ print(solution([2, 5], [1, 2], [1, 4], 11)) # 27
 #print(solution([10, 10], [4, 4], [3, 3], 5000))  # 739323
 ##print(solution([2, 3], [1, 1], [1, 2], 10000))  # ?
 #print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 4?
-#print(solution([10, 10], [4, 4], [3, 3], 2000))  # 739323?
-#print(solution([10, 10], [5, 5], [6, 6], 200)) # 1175 !!!! 1183
+#print(solution([10, 10], [4, 4], [3, 3], 2000))  # 739323
+#print(solution([10, 10], [5, 5], [6, 6], 200)) # 1175
 #print(solution([10, 10], [5, 5], [6, 5], 200)) # 1167
-#print(solution([10, 10], [6, 6], [5, 5], 200)) # 1175 !!!! 1197
+#print(solution([10, 10], [6, 6], [5, 5], 200)) # 1175
 #print(solution([10, 10], [6, 5], [5, 5], 200)) # 1167
 #print(solution([10, 10], [4, 4], [3, 4], 2000)) # 118272
-##print(solution([10, 10], [4, 4], [3, 8], 2000))  # 118315  !!!! 118522
-#print(solution([10, 10], [4, 4], [3, 2], 2000)) # 118315  !!!!118524
-print(solution([10, 10], [6, 6], [5, 5], 60)) #103 !!!! 104
+##print(solution([10, 10], [4, 4], [3, 8], 2000))  # 118315
+#print(solution([10, 10], [4, 4], [3, 2], 2000)) # 118315
+print(solution([10, 10], [6, 6], [5, 5], 60)) #103
 
