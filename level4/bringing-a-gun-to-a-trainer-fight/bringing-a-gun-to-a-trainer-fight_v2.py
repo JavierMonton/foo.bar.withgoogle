@@ -63,6 +63,10 @@ def solution(dimensions, your_position, trainer_position, distance):
     #print(trainer_locations)
     # print(me_locations)
     # transform me_locations for me_direcitons
+    print(len(trainer_locations))
+    filter(lambda location: location[0] < distance and location[1] < distance, trainer_locations)
+    print(len(trainer_locations))
+
 
     # check distance + valid shot
     for t in trainer_locations:
@@ -78,7 +82,7 @@ def solution(dimensions, your_position, trainer_position, distance):
                 dir = (t[0] - me[0], t[1] - me[1])
 
                 if distance_y != 0 and dir[1] != 0 and abs(dir[0]) <= abs(distance_x) and abs(dir[1]) <= abs(distance_y) and (distance_x != dir[0] or distance_y != dir[1]) and Fraction(distance_x, distance_y) == Fraction(dir[0], dir[1]) and (distance_x != dir[0]*-1 or distance_y != dir[1]*-1):
-                    if distance_x == 0 and dir[0] == 0 and ((distance_y > 0 and dir[1] < 0) or (dir[1] < 0 and distance_y > 0)):
+                    if distance_x == 0 and dir[0] == 0 and ((distance_y > 0 and dir[1] < 0) or (dir[1] > 0 and distance_y < 0)):
                         #print("weird case")
                         total = total
                     else:
@@ -86,7 +90,7 @@ def solution(dimensions, your_position, trainer_position, distance):
                         total -= 1
                         break
                 elif distance_y == 0 and dir[1] == 0 and dir[0] != 0 and abs(dir[0]) <= abs(distance_x) and (distance_x != dir[0] or distance_y != dir[1]) and Fraction(distance_y, distance_x) == Fraction(dir[1], dir[0]):  # inverted Fraction to avoid division by 0
-                    if ((distance_x > 0 and dir[0] < 0) or (dir[0] < 0 and distance_x > 0)):
+                    if ((distance_x > 0 and dir[0] < 0) or (dir[0] > 0 and distance_x < 0)):
                         #print("weird case x")
                         total = total
                     else:
@@ -110,7 +114,7 @@ def solution(dimensions, your_position, trainer_position, distance):
 
 # print(solution([10, 10], [3, 3], [6, 6], 20))
 #print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-#print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
+print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
 #print(solution([2, 5], [1, 2], [1, 4], 11)) # 27
 #print(solution([2, 3], [1, 2], [1, 1], 4))  # 7
 
@@ -129,6 +133,9 @@ def solution(dimensions, your_position, trainer_position, distance):
 #print(solution([3, 3], [1, 1], [1, 2], 1))  # 1
 print(solution([10, 10], [1, 1], [1, 9], 8))  # 1
 print(solution([10, 10], [1, 1], [9, 1], 8))  # 1
+print(solution([10, 10], [9, 1], [1, 1], 8))  # 1
+print(solution([10, 10], [1, 9], [1, 1], 8))  # 1
 
-#print(solution([10, 10], [4, 4], [3, 3], 5000))  # 739323?
+
+print(solution([10, 10], [4, 4], [3, 3], 5000))  # 739323?
 # print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 9
