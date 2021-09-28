@@ -1,5 +1,4 @@
 import math
-from fractions import Fraction
 
 
 def solution(dimensions, your_position, trainer_position, distance):
@@ -17,7 +16,7 @@ def solution(dimensions, your_position, trainer_position, distance):
 
     me_jump_x1 = me[0] * 2  # left
     me_jump_x2 = (width - me[0]) * 2  # right
-    me_jump_y1 = trainer[1] * 2  # down
+    me_jump_y1 = me[1] * 2  # down
     me_jump_y2 = (height - me[1]) * 2  # up
 
     mirror_x = int(math.ceil(distance / width) + 2)
@@ -98,7 +97,7 @@ def solution(dimensions, your_position, trainer_position, distance):
 
 
 def astr(a, b):
-    return str(compute_angle(a, b))
+    return compute_angle(a, b)
 def compute_angle(a, b):
     #return math.atan2(a[0] - b[0], a[1] - b[1])
     return math.atan2(b[1] - a[1], b[0] - a[0])
@@ -110,11 +109,11 @@ def compute_distance(pos1, pos2):
 
 
 
-#print(solution([10, 10], [3, 3], [6, 6], 20))
-#print(solution([3, 2], [2, 1], [1, 1], 4))  #7 !!
-#print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-#print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
-#print(solution([2, 5], [1, 2], [1, 4], 11)) # 27
+print(solution([10, 10], [3, 3], [6, 6], 20))
+print(solution([3, 2], [2, 1], [1, 1], 4))  #7 !!
+print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
+print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
+print(solution([2, 5], [1, 2], [1, 4], 11)) # 27
 #print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
 #print(solution([2, 3], [1, 2], [1, 1], 4))  # 7
 #print(solution([23, 10], [6, 4], [3, 2], 23))  # 8
@@ -145,11 +144,12 @@ def compute_distance(pos1, pos2):
 ##print(solution([2, 3], [1, 1], [1, 2], 10000))  # ?
 #print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 4?
 #print(solution([10, 10], [4, 4], [3, 3], 2000))  # 739323?
-print(solution([10, 10], [5, 5], [6, 6], 200)) # 1175 !!!! 1183
-print(solution([10, 10], [5, 5], [6, 5], 200)) # 1167
-print(solution([10, 10], [6, 6], [5, 5], 200)) # 1175 !!!! 1197
-print(solution([10, 10], [6, 5], [5, 5], 200)) # 1167
-print(solution([10, 10], [4, 4], [3, 4], 2000)) # 118272
-#print(solution([10, 10], [4, 4], [3, 8], 2000))  # 118315  !!!! 118522
-print(solution([10, 10], [4, 4], [3, 2], 2000)) # 118315  !!!!118524
+#print(solution([10, 10], [5, 5], [6, 6], 200)) # 1175 !!!! 1183
+#print(solution([10, 10], [5, 5], [6, 5], 200)) # 1167
+#print(solution([10, 10], [6, 6], [5, 5], 200)) # 1175 !!!! 1197
+#print(solution([10, 10], [6, 5], [5, 5], 200)) # 1167
+#print(solution([10, 10], [4, 4], [3, 4], 2000)) # 118272
+##print(solution([10, 10], [4, 4], [3, 8], 2000))  # 118315  !!!! 118522
+#print(solution([10, 10], [4, 4], [3, 2], 2000)) # 118315  !!!!118524
+print(solution([10, 10], [6, 6], [5, 5], 60)) #103 !!!! 104
 
