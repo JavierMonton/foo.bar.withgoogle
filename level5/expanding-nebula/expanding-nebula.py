@@ -4,11 +4,13 @@ import itertools
 def solution(g):
     rows = len(g)
     cols = len(g[0])
-    final_rows = []
-    possible_rows = generate_possible_rows(cols)
+    final_rows = generate_possible_rows(cols)
     # access with possible_rows[0][0] - row - field
-    for i in range(0, cols + 1):
+    for i in range(1, rows + 1):
         possible_rows = generate_possible_rows(cols)
+        final_rows = merge_rows(final_rows, possible_rows, g[i-1])
+
+    return len(final_rows)
 
 
 
@@ -23,11 +25,22 @@ def merge_rows(main_rows, new_rows, expected):
     for a in main_rows:
         for b in new_rows:
             # check valid or not row
-            valid_combination(a, b, expected)
-            ???
+            if valid_combination(a, b, expected) is True:
+                final.append(b)
+    return final
+
 
 def valid_combination(row1, row2, expected):
     """Given 2 rows and a expected evolution, returns True or False if the given rows meet the expected"""
+    result = []
+    for i in range(0, len(row1)-1):
+        cell = [[row1[i], row1[i+1]], [row2[i], row2[i+1]]]
+        result.append(get_evolution(cell))
+    if result == expected:
+        return True
+    else:
+        return False
+
 
 
 def get_evolution(cell):
@@ -35,11 +48,11 @@ def get_evolution(cell):
     total = 0
     if cell[0][0] is True:
         total += 1
-    if cell[0][0] is True:
+    if cell[0][1] is True:
         total += 1
-    if cell[0][0] is True:
+    if cell[1][0] is True:
         total += 1
-    if cell[0][0] is True:
+    if cell[1][1] is True:
         total += 1
     if total == 1:
         return True
