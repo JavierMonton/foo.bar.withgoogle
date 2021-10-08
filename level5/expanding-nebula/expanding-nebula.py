@@ -1,19 +1,20 @@
 import math
 import itertools
 
+
 def solution(g):
     rows = len(g)
     cols = len(g[0])
-    final_rows = generate_possible_rows(cols)
-    # access with possible_rows[0][0] - row - field
-    for i in range(1, rows + 1):
-        possible_rows = generate_possible_rows(cols)
-        final_rows = merge_rows(final_rows, possible_rows, g[i-1])
+    final_rows = generate_possible_rows(rows)
+    for i in range(1, cols + 1):
+        possible_rows = generate_possible_rows(rows)
+        final_rows = merge_rows(final_rows, possible_rows, column(g, i-1))
 
     return len(final_rows)
 
 
-
+def column(matrix, i):
+    return [row[i] for row in matrix]
 
 def generate_possible_rows(columns):
     return list(itertools.product([True, False], repeat=columns + 1))
