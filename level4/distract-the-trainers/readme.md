@@ -59,7 +59,8 @@ Just pick pairs in order, if not all of them are paired correctly, shuffle the i
 Because there is only 100 possible elements, doing enough shuffles (1000 or 10000?) probably will lead to the solution.
 On every shuffle we keep the minimum number of unpaired elements.
 
-Finally, a better solution using the same idea is to get every element and find a pair for it (just the first the we can find)
-and keep pairing all of them. If at the end there are unpaired element, 
+Finally, a better solution using the same idea is to get every element and find a pair for it (just the first that we can find)
+and keep pairing all of them. If at the end there are unpaired elements, 
 shuffle the initial array putting the unpaired ones at the beginning.
-Doing 1000 iterations of this process was enough to pass all the tests (and yes, I used `verify` several times to ensure they were always passing the tests)
+Doing 1000 iterations of this process was enough to pass all the tests 
+(and yes, I used `verify` several times to ensure they were always passing the tests). I'll lose my FP license with this
