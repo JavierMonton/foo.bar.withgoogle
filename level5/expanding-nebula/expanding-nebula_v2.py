@@ -4,6 +4,7 @@ from collections import defaultdict
 checked_combinations = {}
 
 
+# final version, it passed all the tests
 def solution(g):
     rows = len(g)
     cols = len(g[0])
@@ -123,4 +124,3 @@ print(solution(
 [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
 [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True]]))
 #  100663356
-#
