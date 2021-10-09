@@ -27,7 +27,7 @@ Test cases
 ==========
 Your code should pass the following test cases.
 Note that it may also be run against hidden test cases not shown here.
-
+```
 -- Python cases --
 Input:
 solution.solution(1,1)
@@ -49,3 +49,17 @@ Input:
 Solution.solution([1, 7, 3, 21, 13, 19])
 Output:
     0
+```
+
+# Solution
+Probably there is a better direct solution, (using graphs maybe?) but 
+I tried a ~~weird~~ funny solution and it worked well.
+
+Just pick pairs in order, if not all of them are paired correctly, shuffle the initial array and repeat.
+Because there is only 100 possible elements, doing enough shuffles (1000 or 10000?) probably will lead to the solution.
+On every shuffle we keep the minimum number of unpaired elements.
+
+Finally, a better solution using the same idea is to get every element and find a pair for it (just the first the we can find)
+and keep pairing all of them. If at the end there are unpaired element, 
+shuffle the initial array putting the unpaired ones at the beginning.
+Doing 1000 iterations of this process was enough to pass all the tests (and yes, I used `verify` several times to ensure they were always passing the tests)
