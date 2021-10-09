@@ -1,4 +1,5 @@
 import itertools
+from collections import defaultdict
 
 checked_combinations = {}
 
@@ -6,13 +7,16 @@ checked_combinations = {}
 def solution(g):
     rows = len(g)
     cols = len(g[0])
-    final_rows = generate_possible_rows(rows)
+    final_rows = defaultdict(int)
+    tmp = generate_possible_rows(rows)
+    for a in tmp:
+        final_rows[a] = 1
 
     for i in range(0, cols):
         possible_rows = generate_possible_rows(rows)
         final_rows = merge_rows(final_rows, possible_rows, column(g, i))
 
-    return len(final_rows)
+    return sum(final_rows.values())
 
 
 def column(matrix, i):
@@ -24,13 +28,15 @@ def generate_possible_rows(columns):
 
 
 def merge_rows(main_rows, new_rows, expected):
-    """Given a 2 list of possible rows and the expected evolution, returns the valid rows that meet that criteria"""
-    final = []
-    for a in main_rows:
+    """Given a 2 list of possible rows and the expected evolution, returns the valid rows that meet that criteria
+    For performance improvements, the main rows are stored in a dict with the count of how many times they appear
+    """
+    final = defaultdict(int)
+    for a, total in main_rows.items():
         for b in new_rows:
             # check valid or not row
             if valid_combination(a, b, expected) is True:
-                final.append(b)
+                final[b] += main_rows[a]
     return final
 
 
@@ -72,7 +78,11 @@ def get_evolution(cell):
 
 
 print(solution([[True, False],
-                [True, True]]))  # ?
+                [True, True]]))  #10
+
+print(solution([[False, False, False],
+                [False, False, False],
+                [False, False, False]]))  # 10148
 
 print(solution([[True, False, True],
                 [False, True, False],
@@ -91,11 +101,12 @@ print(solution([[True, True, False, True, False, True, False, True, True, False]
 
 print(solution(
 [[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True],
-[True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True]]))
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False],
+[False, False, False, False, True, False, True, False, True, False, True, False, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, False, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False]]))
