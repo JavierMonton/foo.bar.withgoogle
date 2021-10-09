@@ -81,3 +81,17 @@ Output:
 
 
 # Solution
+It seems that there ways to resolve this using Cellular Automaton (CA) and computing preimages, 
+but I went to solve it on my way.
+
+My first approach was to create all possible combinations of True and False per row, get 2 rows and combine all of them,
+checking if the result of every combination was the expected given image. Just following that process it works fine, 
+but it doesn't perform as expected.
+A few improvements did this process to pass all the tests:
+- As max rows is 9 and max columns is 50, use this exact algorithm but using columns instead of rows
+- Every possible combination (2x2) cells are checked so many times, and they are always the same, 
+so keeping the first results in a dictionary save some time (not a lot though)
+- Every possible starting column (all combinations of True and False) can be reduced using the expected column 
+(for each True in the expected column, a row with 2 consecutive Trues can be skipped)
+- Merging all possible rows while checking if they match the expected gives a lot of duplicate possibilities so 
+using a dictionary with key (possible row) and value (number of occurrences) reduce a lot the complexity
