@@ -61,5 +61,7 @@ Output:
 
 I was struggling with this one, as far as I can thin, the solution is an infinite fraction so I wasn't so sure how to proceed.
 I tried a few ideas but the fractions weren't the same as the expected ones. 
-Finally, searching about this kind of problems I found that Absorving Markov Chains describe this exact same problem. 
+Finally, searching about this kind of problems 
+I found that [Absorbing Markov Chains](https://en.wikipedia.org/wiki/Absorbing_Markov_chain#:~:text=In%20the%20mathematical%20theory%20of,with%20an%20infinite%20state%20space.) 
+describe this exact same problem. 
 I had to watch a few videos explaining how it works and finally I just followed the formula of the Absorving Markov Chains.
