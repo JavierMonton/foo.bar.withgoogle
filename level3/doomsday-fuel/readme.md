@@ -34,27 +34,21 @@ So, putting that together, and making a common denominator, gives an answer in t
 `[s2.numerator, s3.numerator, s4.numerator, s5.numerator, denominator]` which is:
 `[0, 3, 2, 9, 14]`.
 
-#### Test cases
-
-Inputs:
-`
+## Test cases
+```
+Input:
 Solution.solution([[0, 2, 1, 0, 0], [0, 0, 0, 3, 4], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]])
-`
+
 
 Output:
-`
 [7, 6, 8, 21]
-`
 
-Inputs:
-`
+Input:
 Solution.solution([[0, 1, 0, 0, 0, 1], [4, 0, 0, 3, 2, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]])
-`
 
 Output:
-`
 [0, 3, 2, 9, 14]
-`
+```
 
 
 # Solution
