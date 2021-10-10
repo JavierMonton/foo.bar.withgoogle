@@ -47,6 +47,8 @@ and vertical reflections, and would return 4.
 The width of the grid will be between 3 and 50 inclusive, 
 and the height of the grid will be between 3 and 9 inclusive. 
 The answer will always be less than one billion (10^9).
+
+## Test Cases
 ```
 Inputs:
 Solution.solution([

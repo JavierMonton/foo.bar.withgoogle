@@ -1,6 +1,7 @@
 import numpy as np
 from fractions import Fraction
 
+
 def solution(m):
     matrix = np.matrix(m)
     if matrix.sum() == 0 or matrix[0].sum() == 0:

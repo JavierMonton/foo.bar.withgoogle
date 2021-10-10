@@ -1,4 +1,5 @@
-### The challenge specification
+# Doomsday Fuel
+
 Making fuel for the LAMBCHOP's reactor core is a tricky process because of the exotic matter involved. It starts as raw ore, then during processing, begins randomly changing between forms, eventually reaching a stable form. There may be multiple stable forms that a sample could ultimately reach, not all of which are useful as fuel.
 
 Commander Lambda has tasked you to help the scientists increase fuel creation efficiency by predicting the end state of a given ore sample. You have carefully studied the different structures that the ore can take and which transitions it undergoes. It appears that, while random, the probability of each structure transforming is fixed. That is, each time the ore is in 1 state, it has the same probabilities of entering the next state (which might be the same state).  You have recorded the observed transitions in a matrix. The others in the lab have hypothesized more exotic forms that the ore can become, but you haven't seen all of them.
@@ -37,24 +38,28 @@ So, putting that together, and making a common denominator, gives an answer in t
 
 Inputs:
 `
-(int) m = [[0, 2, 1, 0, 0], [0, 0, 0, 3, 4], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+Solution.solution([[0, 2, 1, 0, 0], [0, 0, 0, 3, 4], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]])
 `
 
 Output:
 `
-(int list) [7, 6, 8, 21]
+[7, 6, 8, 21]
 `
 
 Inputs:
 `
-(int) m = [[0, 1, 0, 0, 0, 1], [4, 0, 0, 3, 2, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
+Solution.solution([[0, 1, 0, 0, 0, 1], [4, 0, 0, 3, 2, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]])
 `
 
 Output:
 `
-(int list) [0, 3, 2, 9, 14]
+[0, 3, 2, 9, 14]
 `
 
 
 # Solution
-Using absorbing Markov chains
+
+I was struggling with this one, as far as I can thin, the solution is an infinite fraction so I wasn't so sure how to proceed.
+I tried a few ideas but the fractions weren't the same as the expected ones. 
+Finally, searching about this kind of problems I found that Absorving Markov Chains describe this exact same problem. 
+I had to watch a few videos explaining how it works and finally I just followed the formula of the Absorving Markov Chains.
