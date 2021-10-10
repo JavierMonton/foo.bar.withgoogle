@@ -95,49 +95,10 @@ def compute_distance(a, b):
     return math.sqrt(math.pow(a[0] - b[0], 2) + math.pow(a[1] - b[1], 2))
 
 
-
-
-print(solution([10, 10], [3, 3], [6, 6], 20))
-print(solution([3, 2], [2, 1], [1, 1], 4))  #7 !!
+print(solution([10, 10], [3, 3], [6, 6], 20))  # 11
+print(solution([3, 2], [2, 1], [1, 1], 4))  # 7
 print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
 print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
-print(solution([2, 5], [1, 2], [1, 4], 11)) # 27
-#print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
-#print(solution([2, 3], [1, 2], [1, 1], 4))  # 7
-#print(solution([23, 10], [6, 4], [3, 2], 23))  # 8
-#print(solution([2, 3], [1, 2], [1, 1], 4))  # 7
-#print(solution([10, 10], [1, 1], [9, 9], 10))  # 0
-#print(solution([10, 5], [1, 1], [1, 3], 3))  # 2
-#print(solution([10, 2], [2, 1], [9, 1], 10))  # 5
-#print(solution([3, 2], [1, 1], [2, 1], 8))  # 7?
-#print(solution([3, 2], [1, 1], [2, 2], 8))  # 4?
-#print(solution([3, 2], [1, 1], [2, 2], 1))  # 0
-#print(solution([3, 3], [1, 1], [3, 3], 1))  # 0
-#print(solution([4, 4], [1, 1], [3, 3], 2))  # 0
-#print(solution([4, 4], [1, 1], [3, 3], 3))  # 1?
-#print(solution([3, 3], [1, 1], [1, 2], 1))  # 1
-#print(solution([10, 10], [1, 1], [1, 9], 8))  # 1
-#print(solution([10, 10], [1, 1], [9, 1], 8))  # 1
-#print(solution([10, 10], [9, 1], [1, 1], 8))  # 1
-#print(solution([10, 10], [1, 9], [1, 1], 8))  # 1
-#print(solution([10, 10], [5, 5], [5, 6], 3))  # 1
-#print(solution([10, 10], [2, 2], [4, 4], 10))  # 3
-##
-##
-#print(solution([2, 2], [1, 1], [1, 1], 800))  #1 ?
-#print(solution([10, 10], [4, 4], [3, 3], 20))  # 9
-#print(solution([3, 3], [1, 1], [2, 2], 5))  # 7
-#print(solution([10, 10], [4, 4], [3, 5], 5000))  # 772025
-#print(solution([10, 10], [4, 4], [3, 3], 5000))  # 739323
-##print(solution([2, 3], [1, 1], [1, 2], 10000))  # ?
-#print(solution([1250, 1250], [150, 150], [185, 100], 500))  # 4?
-#print(solution([10, 10], [4, 4], [3, 3], 2000))  # 739323
-#print(solution([10, 10], [5, 5], [6, 6], 200)) # 1175
-#print(solution([10, 10], [5, 5], [6, 5], 200)) # 1167
-#print(solution([10, 10], [6, 6], [5, 5], 200)) # 1175
-#print(solution([10, 10], [6, 5], [5, 5], 200)) # 1167
-#print(solution([10, 10], [4, 4], [3, 4], 2000)) # 118272
-##print(solution([10, 10], [4, 4], [3, 8], 2000))  # 118315
-#print(solution([10, 10], [4, 4], [3, 2], 2000)) # 118315
-print(solution([10, 10], [6, 6], [5, 5], 60)) #103
+print(solution([2, 5], [1, 2], [1, 4], 11))  # 27
+print(solution([10, 10], [6, 6], [5, 5], 60))  # 103
 

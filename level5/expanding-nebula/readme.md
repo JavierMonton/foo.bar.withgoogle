@@ -49,34 +49,34 @@ and the height of the grid will be between 3 and 9 inclusive.
 The answer will always be less than one billion (10^9).
 ```
 Inputs:
-(boolean) g = [
+Solution.solution([
                 [true, false, true],
                 [false, true, false],
                 [true, false, true]
-              ]
+              ])
 Output:
-(int) 4
+4
 
 Inputs:
-(boolean) g = [
+Solution.solution([
                 [true, false, true, false, false, true, true, true],
                 [true, false, true, false, false, false, true, false],
                 [true, true, true, false, false, false, true, false],
                 [true, false, true, false, false, false, true, false],
                 [true, false, true, false, false, true, true, true]
-              ]
+              ])
 Output:
-(int) 254
+254
 
 Inputs:
-(boolean) g = [
+Solution.solution([
                 [true, true, false, true, false, true, false, true, true, false],
                 [true, true, false, false, false, false, true, true, true, false],
                 [true, true, false, false, false, false, false, false, false, true],
                 [false, true, false, false, false, false, true, true, false, false]
-              ]
+              ])
 Output:
-(int) 11567
+11567
 ```
 
 
