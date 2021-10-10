@@ -22,6 +22,7 @@ Moves can only be made in cardinal directions; no diagonal moves are allowed.
 
 Test cases
 ==========
+```
 Input:
     Solution.solution([[0, 1, 1, 0], [0, 0, 0, 1], [1, 1, 0, 0], [1, 1, 1, 0]])
 Output:
@@ -30,11 +31,11 @@ Input:
     Solution.solution([[0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 0]])
 Output:
     11
-    
+```
     
 # Solution
 I did a kind of [Breadth First Search (BFS)](https://en.wikipedia.org/wiki/Breadth-first_search),
 from the starting point going to all possible directions at the same time and keeping track of the ones 
 that I already passed. I used a 3D matrix to store passed positions (Z dimension with number of walls passed), 
-if a new locations has been already passed with the same number of walls and less steps, we can remove that path. 
+if a new location has been already passed with the same number of walls and less steps, we can remove that path. 
 First path that reaches the end is the fastest one.
