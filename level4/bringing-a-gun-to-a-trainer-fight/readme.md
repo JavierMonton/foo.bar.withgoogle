@@ -74,16 +74,16 @@ and calculating the distance of every step. With this solution it was really eas
 Some tests passed, including the given ones, but not all of them. I wondered then if more angles were possible.
 
 Final solution was about mirroring the Trainer and myself, for that I just calculated the sum needed for every mirror 
-(in %2 as there are two different steps will creating a mirror)
+(in %2 as there are two different steps while creating a mirror)
 And just inverting the sign for x, for y and for both to get the other mirrors. 
-Mirror are done until the maximum distance is passed.
+Mirrors are created until the maximum distance is passed.
 
 Then, we have all locations of the Trainer and myself, we only need to shoot all of them, but we have to check if some of them are repeated
 (trainer repeating same angle or a trainer after myself in the same angle) 
 I was using Fractions at the beginning (I'm not very familiar with Python) but it's hard to use as some negative and positives can be equal. 
 Finally, using `atan2` we can obtain an angle for x and y so it makes everything easier.
 Storing all the angles in a `set` to ensure we don't have duplicates, we only need to check if every angle 
-in Trainer's set is myself's angles and if in they are, which is closer.
+in Trainer's set is in myself's angles and, if in they are, which is closer.
 
 
 
