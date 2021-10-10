@@ -62,3 +62,8 @@ def find_parent(leaf, value, result=None):
         else:
             return result
     return result
+
+
+print(solution(3, [7, 3, 5, 1]))  # [-1, 7, 6, 3]
+
+print(solution(5, [19, 14, 28]))  # [21, 15, 29]
