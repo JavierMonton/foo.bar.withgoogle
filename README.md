@@ -1,8 +1,7 @@
 # foobar.withgoogle
 This is a repository of the solutions that I did for [foobar Challenge](https://foobar.withgoogle.com/) from Google
 
-It seems to be a way that Google has to hire some people but I'm not sure about that, 
-I took it as a game, pretty similar to HackerRank contexts.
+It seems to be a way that Google has to hire some people. I took it as a game, pretty similar to HackerRank contexts.
 
 # How it starts
 
