@@ -1,5 +1,5 @@
 # foobar.withgoogle
-This is a repository of the solutions that I did for [foobar Challenge](https://foobar.withgoogle.com/) from Google
+This is a repository of the solutions that I did for the [foobar Challenge](https://foobar.withgoogle.com/) from Google
 
 It seems to be a way that Google has to hire some people. I took it as a game, pretty similar to HackerRank contexts.
 
@@ -14,7 +14,7 @@ when suddenly the results page of Google did an animation and showed a message s
 
 I was really surprised about that, 15 years coding and I never saw that before. With no doubt, I clicked "I want to play".
 
-Then a new website appears, it seems like a computer console so I started to try commands like `ls` and `help`.
+Then a new website appears, it seems like a computer console, so I started to try commands like `ls` and `help`.
 I found a list of commands and a few explanations. `request` command gives you a new code challenge.
 
 ![foobar console](console.jpeg "Foobar console")
@@ -29,7 +29,7 @@ I focused on the algorithm more than best coding practices.
 
 I chose Python over Java because it is easier, it needs less boilerplate code to start coding, 
 and it uses arbitrary precision for numbers, thing that it's really useful during these exercises. 
-I would have chosen Scala if I could :cry:
+
 <details>
 <summary>Level 1</summary>
 
